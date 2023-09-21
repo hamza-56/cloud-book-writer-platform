@@ -1,0 +1,41 @@
+{% extends "books/base.html" %} {% block content %}
+<h2>Collaborators for {{ book.title }}</h2>
+<ul>
+    {% for collaborator in book.collaborators.all %}
+    <li class="my-3">
+        {{ collaborator.username }}
+        <form
+            method="post"
+            style="display: inline"
+            action="{% url 'remove_collaborator' book.id collaborator.id %}"
+        >
+            {% csrf_token %}
+            <input
+                type="hidden"
+                name="collaborator_id"
+                value="{{ collaborator.id }}"
+                class="textinput"
+            />
+            <button class="btn btn-outline-danger" type="submit">Remove</button>
+        </form>
+    </li>
+    {% empty %}
+    <li>No collaborators yet.</li>
+    {% endfor %}
+</ul>
+
+<h2>Add Collaborator to {{ book.title }}</h2>
+<form method="post" action="{% url 'add_collaborator' book.id %}">
+    {% csrf_token %}
+    <label for="collaborator_username">Username:</label>
+    <input
+        type="text"
+        id="collaborator_username"
+        name="collaborator_username"
+        class="textinput form-control"
+        required
+    />
+    <button class="btn btn-outline-info" type="submit">Add Collaborator</button>
+</form>
+
+{% endblock %}

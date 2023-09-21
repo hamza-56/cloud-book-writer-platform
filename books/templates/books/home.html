@@ -1,0 +1,16 @@
+{% extends "books/base.html" %} 
+{% block content %}
+<h2>Your Books</h2>
+<ul>
+    {% for book in user_books %}
+    <li class="my-3">
+        <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+        {% if user == book.author %}
+        <a href="{% url 'manage_collaborators' book.id %}" class="btn btn-outline-info"
+            >Manage Collaborators</a
+        >
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
