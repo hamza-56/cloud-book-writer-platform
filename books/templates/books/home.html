@@ -4,7 +4,7 @@
 <ul>
     {% for book in user_books %}
     <li class="my-3">
-        <a href="{% url 'book_detail' book.id %}">{{ book.title }}</a>
+        <a href="{% url 'book_edit' book.id %}">{{ book.title }}</a>
         {% if user == book.author %}
         <a href="{% url 'manage_collaborators' book.id %}" class="btn btn-outline-info"
             >Manage Collaborators</a

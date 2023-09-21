@@ -11,7 +11,8 @@
 
 <h2>Edit Book</h2>
 <form method="post">
-    {% csrf_token %} {{ book_form|crispy }}
+    {% csrf_token %} 
+    {{ book_form|crispy }}
 
     <input
         type="hidden"

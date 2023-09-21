@@ -71,14 +71,19 @@ class AddBookView(View):
         )
 
 
-class BookDetailView(TemplateView):
-    template_name = "books/book_detail.html"
+class BookEditView(TemplateView):
+    template_name = "books/book_edit.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         book_id = self.kwargs.get("book_id")
         book = get_object_or_404(Book, pk=book_id)
         context["book"] = book
+        context["book_form"] = BookForm(
+            initial={
+                "title": book.title,
+            }
+        )
         return context
 
 

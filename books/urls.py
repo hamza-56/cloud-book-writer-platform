@@ -8,8 +8,8 @@ urlpatterns = [
     path("books/add/", login_required(views.AddBookView.as_view()), name="add_book"),
     path(
         "books/<int:book_id>/",
-        login_required(views.BookDetailView.as_view()),
-        name="book_detail",
+        login_required(views.BookEditView.as_view()),
+        name="book_edit",
     ),
     path(
         "books/<int:book_id>/manage_collaborators/",
